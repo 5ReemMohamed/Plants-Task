@@ -1,103 +1,138 @@
 import Image from "next/image";
+import PlantCard from "./_Components/PlantCard/PlantCard";
+import Testimonial from "./_Components/Testimonial/Testimonial";
+import { JSX } from "react";
+import { FaHeadset } from "react-icons/fa";
+import { FaArrowRotateLeft } from "react-icons/fa6";
+import { LuBox } from "react-icons/lu";
+import { RiSecurePaymentFill } from "react-icons/ri";
+import { TbPlant2, TbShield, TbTruckDelivery } from "react-icons/tb";
+import { plants } from "@/Data/data";
+
+interface Feature {
+  icon: JSX.Element;
+  title: string;
+  desc: string;
+}
+
+interface Benefit {
+  icon: JSX.Element;
+  title: string;
+  desc: string;
+}
 
 export default function Home() {
-  return (
-    <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
-      <main className="flex flex-col gap-[32px] row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol className="list-inside list-decimal text-sm/6 text-center sm:text-left font-[family-name:var(--font-geist-mono)]">
-          <li className="mb-2 tracking-[-.01em]">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] px-1 py-0.5 rounded font-[family-name:var(--font-geist-mono)] font-semibold">
-              src/app/page.tsx
-            </code>
-            .
-          </li>
-          <li className="tracking-[-.01em]">
-            Save and see your changes instantly.
-          </li>
-        </ol>
+  const features: Feature[] = [
+    { icon: <LuBox className="text-5xl text-[#a4a9a9] hover:translate-x-1.5 transition-all duration-500" />, title: "Free delivery", desc: "For all orders above $45" },
+    { icon: <RiSecurePaymentFill className="text-5xl text-[#a4a9a9] hover:translate-x-1.5 transition-all duration-500" />, title: "Secure payments", desc: "Confidence on all your devices" },
+    { icon: <FaHeadset className="text-5xl text-[#a4a9a9] hover:translate-x-1.5 transition-all duration-500" />, title: "Top-notch support", desc: "sayhello@flacio.com" },
+    { icon: <FaArrowRotateLeft className="text-5xl text-[#a4a9a9] hover:translate-x-1.5 transition-all duration-500" />, title: "180 Days Return", desc: "Return within 180 days" },
+  ];
 
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:w-auto"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 w-full sm:w-auto md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Read our docs
-          </a>
-        </div>
+  const benefits: Benefit[] = [
+    { icon: <TbShield />, title: "Unbeatable quality", desc: "Greater productivity and relaxation" },
+    { icon: <TbTruckDelivery />, title: "Delivery to your door", desc: "Better mental wellbeing and happiness" },
+    { icon: <TbPlant2 />, title: "Bring nature into your life", desc: "Greater productivity and relaxation" },
+  ];
+
+  return (
+    <>
+      <main>
+      
+        <section className="bg-[#F9F4EF] px-10 py-20 grid grid-cols-1 lg:grid-cols-2 gap-4">
+        
+          <div className="relative mx-auto order-1 lg:order-2">
+          <img 
+            src="/img-4.png" 
+            width="700" 
+            height="700" 
+            className="w-full lg:w-[100%] max-w-[700px] h-auto object-cover" 
+            alt="Beautiful indoor plants" 
+            loading="lazy" 
+          />
+
+          <img 
+            src="/ellipse-2.png" 
+            width="600" 
+            height="600" 
+            className="hidden lg:block absolute top-40 lg:w-[90%] xl:w-[100%] max-w-[600px] h-auto rotate-2 lg:left-6 xl:left-8 object-cover" 
+            alt="Decorative ellipse" 
+            loading="lazy" 
+          />
+
+          </div>
+
+         
+          <div className="flex flex-col gap-6 mt-10 order-2 lg:order-none">
+            <h2 className="text-4xl italic">Decorate your home with plants</h2>
+            <p className="text-[#828787] max-w-[90%] leading-7">
+              Praesent egestas tristique nibh. Sed mollis, eros et ultrices tempus,
+              mauris ipsum aliquam libero, non adipiscing dolor urna a orci. Fusce
+              convallis metus id felis luctus adipiscing. Integer tincidunt. Etiam
+              imperdiet imperdiet orci.
+            </p>
+            <ul className="mt-4 flex flex-col gap-8">
+              {benefits.map((benefit, index) => (
+                <li key={index} className="flex gap-4 items-center">
+                  <div className="bg-[#224229] w-12 h-12 md:w-16 md:h-16 rounded-full flex justify-center items-center text-white text-3xl">
+                    {benefit.icon}
+                  </div>
+                  <div>
+                    <h3 className="font-semibold lg:text-xl mb-1">{benefit.title}</h3>
+                    <p className="text-sm text-[#6f7272] tracking-wider">{benefit.desc}</p>
+                  </div>
+                </li>
+              ))}
+            </ul>
+          </div>
+        </section>
+
+       
+        <section className="p-8 shop w-full max-w-screen mx-auto">
+          <h3 className="text-center mb-12 text-4xl tracking-wider">Best Seller</h3>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
+            {plants.slice(0, 8).map((plant) => (
+              <PlantCard key={plant.id} plant={plant} />
+            ))}
+          </div>
+        </section>
+
+      
+        <section className="testimonial">
+          <Testimonial />
+        </section>
+
+       
+        <section className="py-10 text-center border-b border-b-gray-300">
+          <h2 className="capitalize text-4xl mb-4  italic">Bring life in</h2>
+          <p className="text-[#828787]">Our community has a thing for plant styling. Get inspired.</p>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 mt-12 pb-4 px-9">
+            {["ig-1.jpg", "ig-2.jpg", "ig-3.jpg", "ig-4.jpg"].map((img, index) => (
+              <Image 
+                key={index} 
+                src={`/assets/${img}`} 
+                width={400} 
+                height={400} 
+                className="w-full h-[400px] object-cover hover:scale-[1.03] transition-all duration-500" 
+                alt={`Inspiration ${index + 1}`} 
+              />
+            ))}
+          </div>
+        </section>
+
+        
+        <section className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 justify-center items-center p-10">
+          {features.map((feature, index) => (
+            <div key={index} className="flex gap-4 items-center">
+              <div className="">{feature.icon}</div>
+              <div>
+                <h3 className="text-2xl">{feature.title}</h3>
+                <p className="text-[#828787]">{feature.desc}</p>
+              </div>
+            </div>
+          ))}
+        </section>
       </main>
-      <footer className="row-start-3 flex gap-[24px] flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
-      </footer>
-    </div>
+    </>
   );
 }
