@@ -37,7 +37,7 @@ export default function AboutSection() {
    
       <section className="py-12">
         <h2 className="text-center text-xl lg:text-4xl">About Us</h2>
-        <div className="mt-2 text-center max-w-4xl mx-auto">
+        <div className="mt-2 text-center max-w-4xl mx-auto p-4">
           <p className="text-gray-400 font-bold tracking-widest mb-2">Verdant Haven photosynthesis STORIES</p>
           <h3 className="text-xl lg:text-5xl line-clamp-3 leading-10 lg:leading-16 mb-2"> We connect buyers and sellers with suitable, eco-friendly products</h3>
           <div className="text-2xl flex justify-center icon">
