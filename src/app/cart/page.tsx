@@ -37,7 +37,7 @@ export default function CartPage() {
   };
 
   const increaseQuantity = (id: number) => {
-    let updatedCart = [...cart];
+    const updatedCart = [...cart];
     const itemIndex = updatedCart.findIndex((item) => item.id === id);
 
     if (itemIndex !== -1) {
