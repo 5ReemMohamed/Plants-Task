@@ -20,7 +20,7 @@ export default function PlantCard({ plant }: PlantProps) {
   const addToCart = (event: React.MouseEvent<HTMLButtonElement>) => {
     event.stopPropagation(); 
 
-    let updatedCart = [...cart];
+    const updatedCart = [...cart];
     const existingItemIndex = updatedCart.findIndex((item) => item.id === plant.id);
 
     if (existingItemIndex !== -1) {
