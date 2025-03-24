@@ -10,6 +10,7 @@ interface PlantProps {
 export default function PlantCard({ plant }: PlantProps) {
   const [cart, setCart] = useState<Plants[]>([]);
 
+
   useEffect(() => {
     const storedCart = localStorage.getItem("cart");
     if (storedCart) {
@@ -18,19 +19,24 @@ export default function PlantCard({ plant }: PlantProps) {
   }, []);
 
   const addToCart = (event: React.MouseEvent<HTMLButtonElement>) => {
-    event.stopPropagation(); 
+    event.stopPropagation();
 
-    const updatedCart = [...cart];
+    const storedCart = localStorage.getItem("cart");
+    let updatedCart: Plants[] = storedCart ? JSON.parse(storedCart) : [];
+
     const existingItemIndex = updatedCart.findIndex((item) => item.id === plant.id);
 
     if (existingItemIndex !== -1) {
+
       updatedCart[existingItemIndex].quantity += 1;
     } else {
+
       updatedCart.push({ ...plant, quantity: 1 });
     }
 
-    setCart(updatedCart);
     localStorage.setItem("cart", JSON.stringify(updatedCart));
+
+    setCart(updatedCart);
 
     toast.success(`${plant.title} added to cart!`, {
       duration: 2000,
@@ -57,7 +63,7 @@ export default function PlantCard({ plant }: PlantProps) {
       </div>
       <div className="px-4 py-6">
         <h2 className="text-xl font-semibold my-2">{plant.title}</h2>
-        <p className="text-gray-600 line-clamp-4 mb-2">{plant.description}</p>
+        <p className="text-gray-600 text-sm line-clamp-4 mb-2">{plant.description}</p>
         <p className="text-[#224229] font-bold mb-2">Price: ${plant.price}</p>
         <p className="text-sm text-gray-500 font-bold mb-2">Stock: {plant.quantity}</p>
 
