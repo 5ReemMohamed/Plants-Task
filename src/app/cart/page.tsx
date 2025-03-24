@@ -8,17 +8,14 @@ interface CartItem {
   quantity: number;
   image: string;
 }
-
 export default function CartPage() {
   const [cart, setCart] = useState<CartItem[]>([]);
-
   useEffect(() => {
     const storedCart = localStorage.getItem("cart");
     if (storedCart) {
       setCart(JSON.parse(storedCart));
     }
   }, []);
-
   const updateCartInStorage = (updatedCart: CartItem[]) => {
     setCart(updatedCart);
     localStorage.setItem("cart", JSON.stringify(updatedCart));

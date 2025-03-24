@@ -9,15 +9,12 @@ interface PlantProps {
 
 export default function PlantCard({ plant }: PlantProps) {
   const [cart, setCart] = useState<Plants[]>([]);
-
-
   useEffect(() => {
     const storedCart = localStorage.getItem("cart");
     if (storedCart) {
       setCart(JSON.parse(storedCart));
     }
   }, []);
-
   const addToCart = (event: React.MouseEvent<HTMLButtonElement>) => {
     event.stopPropagation();
 
