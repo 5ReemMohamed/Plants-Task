@@ -1,5 +1,5 @@
 "use client";
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { Toaster, toast } from "react-hot-toast";
 import { Plants } from "@/app/Interfaces/Plants";
 
@@ -8,32 +8,21 @@ interface PlantProps {
 }
 
 export default function PlantCard({ plant }: PlantProps) {
-  const [cart, setCart] = useState<Plants[]>([]);
-  useEffect(() => {
-    const storedCart = localStorage.getItem("cart");
-    if (storedCart) {
-      setCart(JSON.parse(storedCart));
-    }
-  }, []);
   const addToCart = (event: React.MouseEvent<HTMLButtonElement>) => {
     event.stopPropagation();
 
     const storedCart = localStorage.getItem("cart");
-    let updatedCart: Plants[] = storedCart ? JSON.parse(storedCart) : [];
+    const updatedCart: Plants[] = storedCart ? JSON.parse(storedCart) : [];
 
     const existingItemIndex = updatedCart.findIndex((item) => item.id === plant.id);
 
     if (existingItemIndex !== -1) {
-
       updatedCart[existingItemIndex].quantity += 1;
     } else {
-
       updatedCart.push({ ...plant, quantity: 1 });
     }
 
     localStorage.setItem("cart", JSON.stringify(updatedCart));
-
-    setCart(updatedCart);
 
     toast.success(`${plant.title} added to cart!`, {
       duration: 2000,
